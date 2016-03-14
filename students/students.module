@@ -1,0 +1,43 @@
+<?php
+
+/**
+* @file
+* Hooks and functions for the Module Students
+*/
+
+/**
+ * Implements hook_permission().
+ */
+function students_permission() {
+    return array(
+        'access students content' => array(
+            'title' => t('Access Students Content'),
+            'description' => t('List all existing students'),
+        ),
+        'edit students content' => array(
+            'title' => t('Edit Students Content'),
+            'description' => t('Edit students content'),
+        ),
+        'delete students content’' => array(
+            'title' => t('Delete Students Content'),
+            'description' => t('Delete students content'),
+        )
+    );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function students_menu()
+{
+    $items['add-student'] = array(
+        'title' => t('Add a Student'),
+        'file' => 'student_form.inc',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('student_form'),
+        'type' => MENU_NORMAL_ITEM,
+        'access arguments' => array('edit students content')
+    );
+
+    return $items;
+}
